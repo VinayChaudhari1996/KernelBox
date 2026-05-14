@@ -1,8 +1,7 @@
 <p align="center">
-  <img src="logo/logo.svg" alt="KernelBox logo" width="180" />
+  <img src="logo/logo.svg" alt="KernelBox logo" width="360" />
 </p>
 
-<h1 align="center">kernelbox</h1>
 
 <p align="center">
   <em>Persistent IPython kernels for agents, scripts, and tools — no notebook server required.</em>
@@ -250,76 +249,6 @@ export KERNELBOX_EXECUTION_TIMEOUT=120
 uv run fastapi dev --port 8080
 ```
 
----
-
-## Architecture
-
-```mermaid
-graph TB
-    subgraph Clients["🖥️ Client Interfaces"]
-        PY["Python API<br/><code>kernelbox.execute()</code>"]
-        CLI["CLI<br/><code>uv run kernelbox &lt;cmd&gt;</code>"]
-        REST["REST Client<br/><code>HTTP / curl / agent</code>"]
-    end
-
-    subgraph Server["🌐 FastAPI Server  (:8080)"]
-        APP["app.py<br/>Route Handlers"]
-        MODELS["models.py<br/>Request / Response Schemas"]
-        APP --> MODELS
-    end
-
-    subgraph Core["⚙️ Core Engine"]
-        MGR["KernelManagerService<br/><code>manager.py</code><br/>create · list · ping · restart · destroy"]
-        EXEC["KernelExecutor<br/><code>executor.py</code><br/>execute · capture output"]
-        RETRY["RetryController<br/><code>retry.py</code><br/>execute_with_retry"]
-        SESSION["SessionManager<br/><code>session.py</code><br/>get_or_create"]
-    end
-
-    subgraph Store["🗄️ Storage Layer"]
-        REG["Registry<br/><code>registry.py</code>"]
-        FS["File Backend<br/><code>.kernelbox/registry.json</code>"]
-        MEM["Memory Backend<br/><i>in-process dict</i>"]
-        REG --> FS
-        REG --> MEM
-    end
-
-    subgraph Kernel["🐍 IPython Kernel Process"]
-        KM["jupyter_client<br/>KernelManager"]
-        KP["IPython Kernel<br/><i>subprocess</i>"]
-        KM -->|"ZeroMQ<br/>shell / iopub / stdin"| KP
-    end
-
-    subgraph Config["🔧 Configuration"]
-        CFG["KernelBoxConfig<br/><code>config/defaults.py</code><br/>env-var overrides"]
-    end
-
-    subgraph Docker["🐳 Docker (Optional Isolation)"]
-        DC["docker-compose.yml<br/>non-root · read-only FS · tmpfs"]
-    end
-
-    PY -->|"direct import"| MGR
-    PY -->|"direct import"| EXEC
-    PY -->|"direct import"| RETRY
-    CLI -->|"direct import"| MGR
-    REST --> APP
-    APP --> MGR
-    APP --> EXEC
-    APP --> RETRY
-    APP --> SESSION
-    SESSION --> MGR
-    MGR --> REG
-    EXEC --> REG
-    RETRY --> EXEC
-    MGR --> KM
-    EXEC --> KM
-    CFG -.->|"injected"| MGR
-    CFG -.->|"injected"| EXEC
-    CFG -.->|"injected"| RETRY
-    CFG -.->|"injected"| REG
-    Docker -.->|"wraps"| Server
-    Docker -.->|"wraps"| Core
-    Docker -.->|"wraps"| Kernel
-```
 
 ---
 
