@@ -1,0 +1,17 @@
+services:
+  kernelbox:
+    build: .
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    # Use a read-only root filesystem for extra security (optional but recommended)
+    read_only: true
+    # We must mount a tmpfs to /tmp to allow Jupyter to write connection files
+    tmpfs:
+      - /tmp
+    environment:
+      - KERNELBOX_RUNTIME_DIR=/tmp/runtime
+      - KERNELBOX_REGISTRY_PATH=/tmp/registry.json
+    # Restrict capabilities
+    cap_drop:
+      - ALL

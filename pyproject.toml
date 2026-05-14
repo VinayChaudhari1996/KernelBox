@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "kernelbox"
+version = "0.1.0"
+description = "A lightweight IPython kernel utility for agents."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "KernelBox maintainers" }]
+keywords = ["ipython", "jupyter", "kernel", "agents", "execution"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+  "fastapi[standard]>=0.115.0",
+  "jupyter_client>=8.6",
+]
+
+[project.optional-dependencies]
+dev = [
+  "ipykernel>=6.29",
+  "mike>=2.1",
+  "pytest>=8.0",
+  "zensical>=0.0.41",
+]
+
+[project.scripts]
+kernelbox = "kernelbox.cli.kernelbox:main"
+
+[tool.fastapi]
+entrypoint = "kernelbox.server.app:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/kernelbox"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q -p no:cacheprovider"
