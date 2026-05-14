@@ -7,7 +7,6 @@ pytest-cache-files-*/
 .venv/
 dist/
 build/
-site/
 *.egg-info/
 kernelbox-test-registry.json
 .kernelbox-test-registry.json
