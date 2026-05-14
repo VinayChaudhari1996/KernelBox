@@ -34,7 +34,7 @@
 }
 
 /* Home page hero logo */
-.md-typeset p > img[alt="KernelBox logo"] {
+.md-typeset p>img[alt="KernelBox logo"] {
   width: 300px !important;
   height: 300px !important;
   display: block;
