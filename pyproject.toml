@@ -9,8 +9,14 @@ description = "A lightweight IPython kernel utility for agents."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-authors = [{ name = "KernelBox maintainers" }]
+authors = [{ name = "Vinay Chaudhari" }]
+maintainers = [{ name = "Vinay Chaudhari" }]
 keywords = ["ipython", "jupyter", "kernel", "agents", "execution"]
+
+[project.urls]
+Homepage = "https://www.vinaychaudhari.com"
+Repository = "https://github.com/VinayChaudhari1996/KernelBox"
+Documentation = "https://vinaychaudhari1996.github.io/KernelBox/"
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
