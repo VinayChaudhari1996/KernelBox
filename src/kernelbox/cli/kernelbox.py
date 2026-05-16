@@ -60,6 +60,12 @@ def main(argv: list[str] | None = None) -> int:
         _print_json({"alive": alive, "kernel": refreshed.to_dict()})
         return 0 if alive else 1
 
+    if args.command == "serve":
+        import uvicorn
+        from kernelbox.server.app import app
+        uvicorn.run(app, host=args.host, port=args.port)
+        return 0
+
     parser.print_help()
     return 2
 
@@ -90,6 +96,10 @@ def _build_parser() -> argparse.ArgumentParser:
 
     status = subparsers.add_parser("status", help="check kernel health")
     _add_identifier_args(status)
+
+    serve = subparsers.add_parser("serve", help="start the FastAPI server")
+    serve.add_argument("--host", default="127.0.0.1")
+    serve.add_argument("--port", type=int, default=8080)
 
     return parser
 

@@ -1,79 +1,82 @@
-# Setup
+# 🛠️ Setup & Installation
 
-KernelBox uses `uv`.
+Ready to give your agents a brain that remembers? Let's get KernelBox installed.
 
-Do not use `pip` for this project.
+---
 
-## 1. Clone or open the project
+## 🔌 For Users (Library)
 
-Open a terminal in the project folder.
+If you just want to use KernelBox in your project, choose your favorite package manager.
 
-```powershell
-cd F:\Projects\KernelBox
+### Using pip
+```bash
+pip install kernelbox
 ```
 
-## 2. Docker Setup (Recommended)
-
-To run KernelBox securely inside an isolated container, bypassing the need for local Python or `uv` installation, make sure Docker is installed and running, then simply build the image:
-
-```powershell
-docker-compose build
+### Using uv (Fastest)
+```bash
+uv add kernelbox
 ```
 
-## 3. Bootstrap the project
+---
 
-Run:
+## 🏗️ For Contributors (Development)
 
-```powershell
+If you want to modify KernelBox or run the FastAPI server from source, follow these steps.
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/VinayChaudhari1996/KernelBox.git
+cd KernelBox
+```
+
+### 2. Bootstrap the project
+We use `uv` for lightning-fast dependency management. If you don't have it, our bootstrap script will help.
+
+```bash
 python scripts/bootstrap.py
 ```
 
-The script will:
+This script will:
+- Detect your OS.
+- Install `uv` if missing.
+- Create a virtual environment (`.venv`).
+- Install all dependencies (including dev tools).
 
-- detect your operating system
-- install `uv` if it is missing
-- create `.venv`
-- install project dependencies
-- install development tools
+### 3. Verify the installation
+Run the tests to make sure everything is working perfectly:
 
-## 4. Manual setup
-
-If `uv` is already installed, you can run the commands yourself.
-
-```powershell
-uv venv
-uv sync --extra dev
-```
-
-## 5. Check the install
-
-Run the tests:
-
-```powershell
+```bash
 uv run pytest
 ```
 
-Expected result:
+---
 
-```text
-6 passed
+## 🐳 Docker Setup (Recommended for Production)
+
+For maximum security and isolation, we recommend running KernelBox in Docker. This ensures that any code executed by your agent is sandboxed.
+
+```bash
+docker-compose build
+docker-compose up -d
 ```
 
-## 6. Build the docs
+The API will be live at `http://localhost:8080`.
 
-```powershell
+---
+
+## 📖 Working with Docs
+
+If you want to preview these docs locally while making changes:
+
+### Build the docs
+```bash
 uv run zensical build
 ```
 
-## 7. Serve the docs locally
-
-```powershell
+### Serve the docs
+```bash
 uv run zensical serve
 ```
-
-Open:
-
-```text
-http://127.0.0.1:8000
-```
+Then visit `http://127.0.0.1:8000` in your browser.
 

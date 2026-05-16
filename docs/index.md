@@ -1,94 +1,90 @@
 <p align="center">
-  <img src="assets/logo.svg" alt="KernelBox logo" style="width: 300px; height: 300px; display: block; margin: 0 auto;" />
-</p>
-
-<p align="center">
-  <img src="assets/banner_architecture.png" alt="KernelBox architecture" style="width: 100%; height: 100%; display: block; margin: 0 auto;" />
+  <img src="assets/logo.svg" alt="KernelBox logo" style="width: 250px; height: 250px; display: block; margin: 0 auto;" />
 </p>
 
 # KernelBox
 
-**Persistent IPython kernels for agents, scripts, and tools — no notebook server required.**
+**Persistent IPython kernels for your AI agents — without the Jupyter overhead.**
 
-KernelBox talks directly to IPython kernels over ZeroMQ through `jupyter_client`. It gives your agent a persistent Python session it can hold open, run code in, and read structured results from — without spinning up a full Jupyter server.
+Ever wished your AI agent could "just remember" variables between code executions? Or run Bash commands in the same session? KernelBox makes it happen. No notebook server, no bloat. Just pure execution power.
 
 ---
 
-## The 30-second pitch
+## ⚡ Quick Start
+
+Get up and running in seconds.
+
+### Install via pip
+```bash
+pip install kernelbox
+```
+
+### Install via uv (Recommended)
+```bash
+uv add kernelbox
+```
+
+---
+
+## 🤔 What is KernelBox?
+
+KernelBox is a lightweight utility that talks directly to IPython kernels over ZeroMQ. It gives your agent a persistent Python session it can hold open, run code in, and read structured results from.
+
+### Why do you need it?
+- **State Persistence:** Variables, imports, and functions stay in memory between calls.
+- **Agent-First:** Built specifically for LLM agents that need to execute code and see results.
+- **Zero Overhead:** No need to spin up a full Jupyter/Notebook server.
+- **Secure:** Designed to run in isolated Docker environments.
+
+---
+
+## 🚀 Quick Demo
+
+See it in action:
 
 ```python
 from kernelbox import get_or_create, execute, destroy
 
-kernel = get_or_create("demo")
+# Get a kernel named "my-agent"
+kernel = get_or_create("my-agent")
 
-# Step 1 — load data
-execute(kernel, "numbers = [1, 2, 3, 4, 5]")
+# Step 1: Define something
+execute(kernel, "data = {'name': 'KernelBox', 'status': 'awesome'}")
 
-# Step 2 — the kernel still remembers `numbers`
-result = execute(kernel, "sum(numbers)")
-print(result.return_value)  # 15
+# Step 2: It's still there!
+result = execute(kernel, "data['name']")
+print(result.return_value)  # Output: KernelBox
 
-destroy("demo")
+# Clean up when done
+destroy("my-agent")
+```
+```
+'KernelBox'
+True
 ```
 
-State persists between calls. No re-running. No re-serialising into the LLM prompt.
+---
+
+## ✨ Features at a Glance
+
+*   **Named Sessions:** Keep multiple agents isolated with unique session names.
+*   **Rich Results:** Get `stdout`, `stderr`, and `return_value` in a clean, structured object.
+*   **Self-Correction:** Use `execute_with_retry` to let your agent fix its own bugs.
+*   **Universal Interface:** Use it via **Python API**, **REST API (FastAPI)**, or **CLI**.
+*   **Docker Ready:** Pre-configured for secure, non-root execution.
 
 ---
 
-## Pick your interface
+## 🗺️ Where to go next?
 
-| Interface | Best for |
-| --- | --- |
-| **Python API** | Writing agents or automation scripts |
-| **FastAPI service** | HTTP endpoints, Swagger UI, external tools |
-| **CLI** | Shell scripts, quick one-off commands |
-
----
-
-## What it does
-
-- **Creates and manages named kernel sessions** — `get_or_create("name")` returns a live kernel, creating it if needed.
-
-- **Executes Python or Bash code** — `execute(kernel, code)` runs the code and returns a rich structured result.
-
-- **Retries failing code automatically** — `execute_with_retry` calls your repair function after each failure so your agent can self-correct.
-
-- **Exposes a full REST API** — the FastAPI server gives you `POST /sessions/{name}/execute`, `GET /kernels`, and more.
-
-- **Works from the terminal** — the `kernelbox` CLI manages kernels and executes code with JSON output, easy to pipe into `jq`.
-
-- **Persists kernel registry to disk** — the file backend survives server restarts; swap to memory backend for ephemeral use.
-
-- **Runs securely in Docker** — the included `docker-compose.yml` uses a non-root user, read-only filesystem, and tmpfs scratch space.
+*   🚀 [**Installation & Setup**](setup.md) — Dive deeper into the setup.
+*   🐍 [**Python API Guide**](tutorials/python-api.md) — Master the library.
+*   🌐 [**HTTP API Reference**](tutorials/http-api.md) — Connect via REST.
+*   💻 [**CLI Reference**](tutorials/cli.md) — Use it from the terminal.
+*   🛡️ [**Security First**](security.md) — Essential reading for production.
 
 ---
 
-## Assumptions & Current Limitations
-
-!!! warning "Know these before going to production"
-
-    These are known constraints in v0.1.0. Understanding them will help you deploy safely.
-
-| Area | Behaviour in v0.1.0 |
-| --- | --- |
-| **Sandboxing** | Kernels run with the same OS privileges as the calling process. Use the included Docker setup for isolation. |
-| **Authentication** | The FastAPI server has **no auth**. Bind to `127.0.0.1` or place behind a reverse proxy. |
-| **Concurrency** | File registry is not safe for heavy concurrent writes from multiple processes. |
-| **Idle kernel cleanup** | KernelBox tracks idle timeout in metadata but does **not** automatically kill idle kernels. |
-| **Output truncation** | stdout/stderr is cut at `KERNELBOX_OUTPUT_CHAR_LIMIT` (default 10 000 chars). Check `result.truncated`. |
-| **Bash execution** | Bash runs through IPython's `%%bash` magic — not a real shell. Path and env may differ. |
-| **Windows ACL** | The Windows ACL restriction for Jupyter connection files is patched. Connection files may be world-readable. |
-| **Kernel types** | Only the `python3` kernelspec is tested. Other kernelspecs may work but are unsupported. |
-
----
-
-## Where to go next
-
-| | |
-| --- | --- |
-| :material-rocket-launch: [**Setup**](setup.md) | Install and run for the first time |
-| :material-language-python: [**Python API**](tutorials/python-api.md) | Full walkthrough with all return fields |
-| :material-api: [**HTTP API**](tutorials/http-api.md) | curl examples and Swagger UI |
-| :material-console: [**CLI**](tutorials/cli.md) | Terminal commands and JSON output |
-| :material-cog: [**Configuration**](configuration.md) | All environment variables |
-| :material-shield-lock: [**Security**](security.md) | Read before production |
+<p align="center">
+  <i>Built with ❤️ for the agentic future.</i>
+</p>

@@ -13,10 +13,6 @@ authors = [{ name = "Vinay Chaudhari" }]
 maintainers = [{ name = "Vinay Chaudhari" }]
 keywords = ["ipython", "jupyter", "kernel", "agents", "execution"]
 
-[project.urls]
-Homepage = "https://www.vinaychaudhari.com"
-Repository = "https://github.com/VinayChaudhari1996/KernelBox"
-Documentation = "https://vinaychaudhari1996.github.io/KernelBox/"
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
@@ -29,6 +25,11 @@ dependencies = [
   "fastapi[standard]>=0.115.0",
   "jupyter_client>=8.6",
 ]
+
+[project.urls]
+Homepage = "https://www.vinaychaudhari.com"
+Repository = "https://github.com/VinayChaudhari1996/KernelBox"
+Documentation = "https://vinaychaudhari1996.github.io/KernelBox/"
 
 [project.optional-dependencies]
 dev = [

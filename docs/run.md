@@ -1,76 +1,87 @@
-# Run KernelBox
+# 🚀 Let's Run It!
 
-You can run KernelBox in three ways.
+KernelBox is flexible. Whether you're building a Python agent, a web service, or just hacking in the terminal, we've got you covered.
 
-## Run via Docker (Recommended)
+---
 
-The most secure way to run the FastAPI service is via Docker. This drops all host privileges and prevents executed agent code from reading or destroying local files.
+## 🐍 1. Use it as a Python Library
 
-```powershell
-# Start the container in the background
-docker-compose up -d
-```
-
-The API will be available at `http://localhost:8080`.
-
-To stop the service, run:
-```powershell
-docker-compose down
-```
-
-## Run the FastAPI service
-
-Use the official FastAPI CLI. We use port `8080` to prevent conflicts with the Zensical docs server.
-
-Development mode:
-
-```powershell
-uv run fastapi dev --port 8080
-```
-
-Production-style mode:
-
-```powershell
-uv run fastapi run --port 8080
-```
-
-Open the API docs:
-
-```text
-http://127.0.0.1:8080/docs
-```
-
-Other docs:
-
-```text
-http://127.0.0.1:8080/redoc
-http://127.0.0.1:8080/openapi.json
-```
-
-## Run Python code
+The most direct way to give your agent a brain. 
 
 ```python
 from kernelbox import get_or_create, execute
 
-kernel = get_or_create("demo")
-result = execute(kernel, "1 + 1")
+# This creates a kernel (or joins an existing one) named "my-agent"
+kernel = get_or_create("my-agent")
 
-print(result.return_value)
+# Run some code!
+result = execute(kernel, "x = 10; x * 2")
+
+print(f"Result: {result.return_value}")  # Result: 20
 ```
 
-## Run CLI commands
+---
 
-```powershell
-uv run kernelbox create --name demo
-uv run kernelbox exec --name demo "1 + 1"
-uv run kernelbox destroy --name demo
+## 🌐 2. Use it as a REST API (FastAPI)
+
+Perfect if your agents live in a different process or you want to use the Swagger UI.
+
+### Start the server
+```bash
+# If you installed via pip/uv
+kernelbox serve --port 8080
+
+# Or run from source
+uv run fastapi dev src/kernelbox/server/app.py --port 8080
 ```
 
-## Stop everything
-
-Destroy all registered kernels:
-
-```powershell
-uv run kernelbox wipe
+### Hit the endpoint
+```bash
+curl -X POST "http://localhost:8080/sessions/demo/execute" \
+     -H "Content-Type: application/json" \
+     -d '{"code": "print(\"Hello from the API!\")"}'
 ```
 
+---
+
+## 💻 3. Use it via CLI
+
+Great for shell scripts or quick debugging.
+
+```bash
+# Create a session
+kernelbox create --name debug-session
+
+# Execute code
+kernelbox exec --name debug-session "import os; os.getcwd()"
+
+# Wipe all sessions
+kernelbox wipe
+```
+
+---
+
+## 🐳 4. Run via Docker (Recommended)
+
+Running in Docker is the gold standard for security. It prevents agent code from accidentally (or intentionally) touching your host machine.
+
+```bash
+docker-compose up -d
+```
+The API will be available at `http://localhost:8080`.
+
+---
+
+## 🧹 Cleaning Up
+
+Done for the day? You can destroy specific kernels or wipe the whole registry.
+
+```python
+from kernelbox import destroy
+destroy("my-agent")
+```
+
+Or via CLI:
+```bash
+kernelbox wipe
+```

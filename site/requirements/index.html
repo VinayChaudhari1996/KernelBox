@@ -27,7 +27,7 @@
     
     
       
-        <title>Prerequisites - KernelBox</title>
+        <title>📋 What you'll need - KernelBox</title>
       
     
     
@@ -85,7 +85,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#prerequisites" class="md-skip">
+        <a href="#what-youll-need" class="md-skip">
           Skip to content
         </a>
       
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Prerequisites
+              📋 What you'll need
             
           </span>
         </div>
@@ -411,10 +411,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#required" class="md-nav__link">
+  <a href="#core-essentials" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Required
+        🛠️ Core Essentials
       </span>
     </span>
   </a>
@@ -422,10 +422,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#for-the-http-api" class="md-nav__link">
+  <a href="#for-the-rest-api" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        For the HTTP API
+        🌐 For the REST API
       </span>
     </span>
   </a>
@@ -433,10 +433,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#for-docker-recommended-for-isolation" class="md-nav__link">
+  <a href="#for-maximum-security" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        For Docker (Recommended for Isolation)
+        🐳 For Maximum Security
       </span>
     </span>
   </a>
@@ -444,21 +444,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#for-documentation" class="md-nav__link">
+  <a href="#supported-platforms" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        For Documentation
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#supported-operating-systems" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Supported Operating Systems
+        💻 Supported Platforms
       </span>
     </span>
   </a>
@@ -963,10 +952,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#required" class="md-nav__link">
+  <a href="#core-essentials" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Required
+        🛠️ Core Essentials
       </span>
     </span>
   </a>
@@ -974,10 +963,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#for-the-http-api" class="md-nav__link">
+  <a href="#for-the-rest-api" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        For the HTTP API
+        🌐 For the REST API
       </span>
     </span>
   </a>
@@ -985,10 +974,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#for-docker-recommended-for-isolation" class="md-nav__link">
+  <a href="#for-maximum-security" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        For Docker (Recommended for Isolation)
+        🐳 For Maximum Security
       </span>
     </span>
   </a>
@@ -996,21 +985,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#for-documentation" class="md-nav__link">
+  <a href="#supported-platforms" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        For Documentation
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#supported-operating-systems" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Supported Operating Systems
+        💻 Supported Platforms
       </span>
     </span>
   </a>
@@ -1032,104 +1010,88 @@
                 
                   
 
-<h1 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h1>
-<p>You need these tools before setting up KernelBox.</p>
-<h2 id="required">Required<a class="headerlink" href="#required" title="Permanent link">&para;</a></h2>
+<h1 id="what-youll-need">📋 What you'll need<a class="headerlink" href="#what-youll-need" title="Permanent link">&para;</a></h1>
+<p>Before we dive into the magic of stateful kernels, let's make sure your environment is ready.</p>
+<hr />
+<h2 id="core-essentials">🛠️ Core Essentials<a class="headerlink" href="#core-essentials" title="Permanent link">&para;</a></h2>
+<p>These are required to run KernelBox natively.</p>
 <table>
 <thead>
 <tr>
-<th>Tool</th>
-<th>Why</th>
+<th style="text-align: left;">Tool</th>
+<th style="text-align: left;">Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Python 3.10 or newer</td>
-<td>Runs KernelBox</td>
+<td style="text-align: left;"><strong>Python 3.10+</strong></td>
+<td style="text-align: left;">The heart of the system.</td>
 </tr>
 <tr>
-<td><code>uv</code></td>
-<td>Creates the virtual environment and installs packages</td>
+<td style="text-align: left;"><strong>uv</strong></td>
+<td style="text-align: left;">Our preferred (and lightning-fast) package manager.</td>
 </tr>
 <tr>
-<td><code>jupyter_client</code></td>
-<td>Talks to the IPython kernel</td>
-</tr>
-<tr>
-<td><code>ipykernel</code></td>
-<td>Starts Python kernels</td>
+<td style="text-align: left;"><strong>ipykernel</strong></td>
+<td style="text-align: left;">What actually runs the code your agent writes.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="for-the-http-api">For the HTTP API<a class="headerlink" href="#for-the-http-api" title="Permanent link">&para;</a></h2>
+<hr />
+<h2 id="for-the-rest-api">🌐 For the REST API<a class="headerlink" href="#for-the-rest-api" title="Permanent link">&para;</a></h2>
+<p>If you plan to use KernelBox over HTTP (e.g., via a FastAPI service):</p>
 <table>
 <thead>
 <tr>
-<th>Tool</th>
-<th>Why</th>
+<th style="text-align: left;">Tool</th>
+<th style="text-align: left;">Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>FastAPI</td>
-<td>Provides the REST API</td>
+<td style="text-align: left;"><strong>FastAPI</strong></td>
+<td style="text-align: left;">Powers our high-performance REST endpoints.</td>
 </tr>
 <tr>
-<td><code>fastapi-cli</code></td>
-<td>Runs the server with <code>fastapi dev</code> and <code>fastapi run</code></td>
-</tr>
-<tr>
-<td>Uvicorn</td>
-<td>Serves the ASGI app</td>
+<td style="text-align: left;"><strong>Uvicorn</strong></td>
+<td style="text-align: left;">The engine that serves the API.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="for-docker-recommended-for-isolation">For Docker (Recommended for Isolation)<a class="headerlink" href="#for-docker-recommended-for-isolation" title="Permanent link">&para;</a></h2>
+<hr />
+<h2 id="for-maximum-security">🐳 For Maximum Security<a class="headerlink" href="#for-maximum-security" title="Permanent link">&para;</a></h2>
+<p>Highly recommended if you're running untrusted agent code.</p>
 <table>
 <thead>
 <tr>
-<th>Tool</th>
-<th>Why</th>
+<th style="text-align: left;">Tool</th>
+<th style="text-align: left;">Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Docker</td>
-<td>Creates an isolated container</td>
+<td style="text-align: left;"><strong>Docker</strong></td>
+<td style="text-align: left;">Keeps the agent code sandboxed and away from your host files.</td>
 </tr>
 <tr>
-<td>Docker Compose</td>
-<td>Simplifies building and running the container</td>
+<td style="text-align: left;"><strong>Docker Compose</strong></td>
+<td style="text-align: left;">Orchestrates the service with a single command.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="for-documentation">For Documentation<a class="headerlink" href="#for-documentation" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Tool</th>
-<th>Why</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Zensical</td>
-<td>Builds and serves the documentation site</td>
-</tr>
-<tr>
-<td>mike</td>
-<td>Publishes versioned docs to GitHub Pages</td>
-</tr>
-</tbody>
-</table>
-<h2 id="supported-operating-systems">Supported Operating Systems<a class="headerlink" href="#supported-operating-systems" title="Permanent link">&para;</a></h2>
-<p>KernelBox works on:</p>
+<hr />
+<h2 id="supported-platforms">💻 Supported Platforms<a class="headerlink" href="#supported-platforms" title="Permanent link">&para;</a></h2>
+<p>KernelBox is built to be cross-platform and has been tested on:</p>
 <ul>
-<li>Windows</li>
-<li>macOS</li>
-<li>Linux</li>
+<li>✅ <strong>Windows</strong> (including specific fixes for Jupyter connection files)</li>
+<li>✅ <strong>macOS</strong></li>
+<li>✅ <strong>Linux</strong></li>
 </ul>
-<p>The bootstrap script detects the OS and chooses the right <code>uv</code> installer automatically.</p>
+<hr />
+<div class="admonition tip">
+<p class="admonition-title">Don't sweat the small stuff</p>
+<p>If you're contributing to the project, our <code>scripts/bootstrap.py</code> will handle most of these for you!</p>
+</div>
 
 
 
